@@ -12,9 +12,31 @@ const Item = styled.li`
   font-weight:700;
 `
 
+const ContBox = styled.div`
+  width:calc(100% - 150px);
+`
+
+const ButtonBox = styled.div`
+  display:flex;
+  width:150px;
+  gap:1em;
+`
+const Button = styled.button.attrs({
+  type:'button'
+})`
+  flex:1;
+
+
+`;
 const TodoItem = ({text}) =>{
   return(
-    <Item>{text}</Item>
+    <Item>
+      <ContBox>{text}</ContBox>
+      <ButtonBox>
+          <Button>삭제</Button>
+          <Button>수정</Button>
+      </ButtonBox>
+    </Item>
   )
 }
 
