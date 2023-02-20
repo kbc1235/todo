@@ -19,7 +19,7 @@ const ContBox = styled.div`
 const ButtonBox = styled.div`
   display:flex;
   width:150px;
-  gap:1em;
+  gap:0.2em;
 `
 const Button = styled.button.attrs({
   type:'button'
