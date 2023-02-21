@@ -67,27 +67,40 @@ const TodoList = styled.ul`
 `;
 
 const TodoBody = () => {
-  const [text, setText] = useState("");
-  const [todo, setTodo] = useState([]);
   const inputRef = useRef(null);
+  const dataId = useRef(4);
+  const [text, setText] = useState('')
+  const [todo, setTodo] = useState([]);
 
-  const changeTodo = (e) => {
-    setText(e.target.value);
-  };
+  const inputChange = (e) =>{
+    setText(inputRef.current.value)
+    console.log(text)
+  }
   const addTodo = () => {
-    if (text !== "") {
-      setTodo([...todo, text]);
-      setText("");
+    if(text !== ''){
+      setTodo(todo.concat({
+        id:dataId.current,
+        todoText:text
+      }))
+      dataId.current += 1;
+      setText('');
       inputRef.current.value = "";
     }
   };
 
-  const TodoItems = todo.map((data, i) => <TodoItem text={data} key={i} />);
-  
+  const del = (id) => {
+    setTodo(todo.filter((todo) => todo.id !== id))
+  }
+  const edit = () =>{
+
+  }
+
+  const TodoItems = todo.map((data) => <TodoItem text={data.todoText} key={data.id} del={()=>del(data.id)} editTodo={edit}/>);
+
   return (
     <BodyBox>
       <SreachBox>
-        <AddInput onChange={changeTodo} ref={inputRef} />
+        <AddInput  onChange={inputChange} ref={inputRef} />
         <AddButton onClick={addTodo}>할일 추가 ✨</AddButton>
       </SreachBox>
       <TodoList>{TodoItems}</TodoList>
