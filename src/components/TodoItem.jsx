@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -51,6 +52,7 @@ const EditBox = styled.div`
   background: #fff;
   box-sizing: border-box;
   border: 1px solid #e7e7e7;
+  padding:0.3em 1em;
 `;
 const EditInput = styled.input.attrs({
   type: "text",
@@ -58,9 +60,9 @@ const EditInput = styled.input.attrs({
   width: calc(100% - 75px);
   border: none;
   outline: none;
-  font-size: 1.2em;
+  font-size: 0.8em;
   font-weight: 700;
-  padding: 0 1em;
+  padding-right:1em;
 `;
 const EditButton = styled.button.attrs({
   type: "button",
@@ -76,9 +78,10 @@ const EditButton = styled.button.attrs({
   }
 `;
 
-const TodoItem = ({ text, del, editTodo }) => {
+const TodoItem = ({idx, text, del, todoChage}) => {
+  const editInputRef = useRef(null)
   const [editOn, setEditOn] = useState(false);
-
+  const [editText, setEditText] = useState('');
   const edit = () => {
     setEditOn(true);
   };
@@ -87,17 +90,26 @@ const TodoItem = ({ text, del, editTodo }) => {
     setEditOn(false);
   }
 
+  const editInputChange = () =>{
+    setEditText(editInputRef.current.value);
+  }
+  const test = () => {
+    todoChage(idx, editText);
+    setEditOn(false);
+  }
+
   return (
     <Item>
       {editOn && (
         <EditBox>
-          <EditInput />
+          <EditInput onChange={editInputChange} ref={editInputRef}/>
           <ButtonBox>
-            <EditButton onClick={editTodo}>확인</EditButton>
-            <EditButton cansel onClick={editClose}>취소</EditButton>
+          <EditButton cansel onClick={editClose}>취소</EditButton>
+            <EditButton onClick={test}>확인</EditButton>
           </ButtonBox>
         </EditBox>
       )}
+
       <ContBox>{text}</ContBox>
       <ButtonBox>
         <Button cansel onClick={del}>

@@ -6,6 +6,7 @@ import TodoItem from "./TodoItem";
 const BodyBox = styled.div`
   width: 100%;
   min-height: 150px;
+  height: calc(100% - 140px);
   border: 1px solid tomato;
   margin-top: 1em;
   border-radius: 1em;
@@ -57,50 +58,70 @@ const AddButton = styled.button.attrs({
 
 const TodoList = styled.ul`
   width: 100%;
-  max-height: 300px;
-  margin-top: 2em;
+  max-height: calc(100% - 60px);
+  margin-top: 1.5em;
   padding: 0;
-  overflow:auto;
+  overflow: overlay;
   & > li + li {
     margin-top: 0.5em;
+  }
+  &::-webkit-scrollbar {
+    width: 0;
   }
 `;
 
 const TodoBody = () => {
   const inputRef = useRef(null);
-  const dataId = useRef(4);
-  const [text, setText] = useState('')
+  const todoId = useRef(0);
+  const [text, setText] = useState("");
   const [todo, setTodo] = useState([]);
+  const inputChange = () => {
+    setText(inputRef.current.value);
+  };
 
-  const inputChange = (e) =>{
-    setText(inputRef.current.value)
-    console.log(text)
-  }
   const addTodo = () => {
-    if(text !== ''){
-      setTodo(todo.concat({
-        id:dataId.current,
-        todoText:text
-      }))
-      dataId.current += 1;
-      setText('');
+    if (text !== "") {
+      setTodo(
+        todo.concat({
+          id: todoId.current,
+          todoText: text,
+        })
+      );
+      todoId.current += 1;
+      setText("");
       inputRef.current.value = "";
     }
   };
 
   const del = (id) => {
-    setTodo(todo.filter((todo) => todo.id !== id))
-  }
-  const edit = () =>{
+    setTodo(todo.filter((todo) => todo.id !== id));
+  };
 
-  }
+  const todoChage = (id, todoText) => {
+    let newTodo = todo.map(item =>{
+      if(item.id === id){
+        return {...item, todoText}
+      }else{
+        return item
+      }
+    })
+    setTodo(newTodo);
+  };
 
-  const TodoItems = todo.map((data) => <TodoItem text={data.todoText} key={data.id} del={()=>del(data.id)} editTodo={edit}/>);
+  const TodoItems = todo.map((data) => (
+    <TodoItem
+      text={data.todoText}
+      key={data.id}
+      idx={data.id}
+      del={() => del(data.id)}
+      todoChage={todoChage}
+    />
+  ));
 
   return (
     <BodyBox>
       <SreachBox>
-        <AddInput  onChange={inputChange} ref={inputRef} />
+        <AddInput onChange={inputChange} ref={inputRef} />
         <AddButton onClick={addTodo}>할일 추가 ✨</AddButton>
       </SreachBox>
       <TodoList>{TodoItems}</TodoList>
