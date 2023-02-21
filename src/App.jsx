@@ -1,12 +1,14 @@
 import Todo from "./components/Todo";
 import TodoWrap from "./components/TodoWrap";
+import GlobalStyle from "./GlobalStyle";
 
 function App() {
   return (
     <div className="App">
-        <TodoWrap>
-          <Todo />
-        </TodoWrap>
+      <GlobalStyle />
+      <TodoWrap>
+        <Todo />
+      </TodoWrap>
     </div>
   );
 }
