@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Todobox = styled.div`
   width:100vw;
   height:100vh;
-  background:tomato;
+  background:#ebeff3;
 `
 
 const TodoWrap = ({children}) =>{

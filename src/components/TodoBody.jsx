@@ -7,7 +7,6 @@ const BodyBox = styled.div`
   width: 100%;
   min-height: 150px;
   height: calc(100% - 140px);
-  border: 1px solid tomato;
   margin-top: 1em;
   border-radius: 1em;
   padding: 1em;
@@ -16,7 +15,7 @@ const BodyBox = styled.div`
 
 const SreachBox = styled.div`
   display: flex;
-  gap: 0.5em;
+  gap: 1em;
 `;
 
 const AddInput = styled.input.attrs({
@@ -24,13 +23,14 @@ const AddInput = styled.input.attrs({
   placeholder: "오늘 할일을 입력하세요🤔",
 })`
   box-sizing: border-box;
-  background: #efefef;
+  background: #f3f3f3;
   outline: none;
   border: none;
   font-size: 1em;
   padding: 0.5em 1em;
-  border-radius: 1em;
+  border-radius: 0.5em;
   flex: 1;
+  min-height:52px;
   &:focus {
     outline: none;
     border-width: 2px;
@@ -42,17 +42,18 @@ const AddButton = styled.button.attrs({
 })`
   background: tomato;
   border: 0;
-  border-radius: 1em;
+  border-radius: 0.5em;
   color: #fff;
-  margin-top: -0.5em;
-  padding: 0.5em 1em;
-  box-shadow: 0 4px 0 #815a53;
+  padding: 0.5em 1.5em;
+  align-items: center;
+  justify-content: center;
+  max-height:52px;
+  font-weight:700;
   &:active {
-    margin-top: 0em;
     background: #815a53;
   }
   &:hover {
-    margin-top: 0em;
+    background: #815a53;
   }
 `;
 
@@ -62,8 +63,10 @@ const TodoList = styled.ul`
   margin-top: 1.5em;
   padding: 0;
   overflow: overlay;
+  border-radius: 0.5em;
+  border:1px solid #e7e7e7;
   & > li + li {
-    margin-top: 0.5em;
+    border-top: 1px solid #e7e7e7;
   }
   &::-webkit-scrollbar {
     width: 0;
@@ -122,7 +125,7 @@ const TodoBody = () => {
     <BodyBox>
       <SreachBox>
         <AddInput onChange={inputChange} ref={inputRef} />
-        <AddButton onClick={addTodo}>할일 추가 ✨</AddButton>
+        <AddButton onClick={addTodo}>할일 추가 🔔</AddButton>
       </SreachBox>
       <TodoList>{TodoItems}</TodoList>
     </BodyBox>

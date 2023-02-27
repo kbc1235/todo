@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const HeadBox = styled.div`
-  border: 1px solid tomato;
   border-radius: 1em;
   padding: 1em;
 `;

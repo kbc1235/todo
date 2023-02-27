@@ -6,10 +6,9 @@ const Item = styled.li`
   display: flex;
   position: relative;
   width: 100%;
-  height: 50px;
+  min-height: 52px;
   padding: 0 1em;
   align-items: center;
-  background: #e7e7e7;
   font-size: 1.2em;
   box-sizing: border-box;
   font-weight: 700;
@@ -36,6 +35,9 @@ const Button = styled.button.attrs({
   padding: 0.5em;
   color: ${(porps) => (porps.cansel ? "#f4332b" : "#3617ce")};
   flex: 1;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
   &:hover {
     color: #fff;
     background: ${(porps) => (porps.cansel ? "#f4332b" : "#3617ce")};
@@ -71,7 +73,9 @@ const EditButton = styled.button.attrs({
   border: 1px solid ${(porps) => (porps.cansel ? "#f4332b" : "#00cc03")};
   padding: 0.2em;
   color: ${(porps) => (porps.cansel ? "#f4332b" : "#00cc03")};
-  background-color: #fff;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
   &:hover {
     color: #fff;
     background: ${(porps) => (porps.cansel ? "#f4332b" : "#00cc03")};
